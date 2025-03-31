@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文章详情 - TechShare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js"></script>
+<script>
+window.onload = function() {
+  const md = window.markdownit();
+  const content = document.getElementById('article-content');
+  if(content) {
+    const markdown = `
+# TypeScript 4.5 新特性详解
+## 1. 条件类型中的 tail-recursion 优化
+TypeScript 4.5 优化了条件类型中的尾递归，这使得我们可以处理更深层次的递归而不会导致堆栈溢出。
+\`\`\`typescript
+type InfiniteList<T> = [T, ...InfiniteList<T>];
+type Take<N extends number, T extends any[]> = T extends []
+  ? []
+  : N extends 0
+  ? []
+  : T extends [infer First, ...infer Rest]
+  ? [First, ...Take<Subtract<N, 1>, Rest>]
+  : [];
+\`\`\`
+## 2. 新的装饰器语法
+装饰器现在支持类字段和访问器：
+\`\`\`typescript
+class Example {
+    @log
+    private value: string;
+    @logAccess
+    get computedValue() {
+        return this.value.toUpperCase();
+    }
+}
+\`\`\`
+## 3. 导入断言
+现在可以在导入语句中使用类型断言：
+\`\`\`typescript
+import { something } from "./something.json" assert { type: "json" };
+\`\`\`
+## 4. 模板字符串类型改进
+支持更复杂的模板字符串类型操作：
+\`\`\`typescript
+type Color = "red" | "blue";
+type Quantity = "one" | "two";
+type SemanticColors = \`\${Quantity}-\${Color}\`; // "one-red" | "one-blue" | "two-red" | "two-blue"
+\`\`\`
+## 5. 实践建议
+1. 在大型项目中合理使用条件类型
+2. 注意装饰器的性能影响
+3. 使用模板字符串类型提高代码可维护性
+## 总结
+TypeScript 4.5 带来了多项重要更新，这些新特性将帮助我们编写更清晰、更可靠的代码。
+### 代码示例
+\`\`\`typescript
+interface Config<T> {
+    data: T;
+    validate: (value: T) => boolean;
+}
+function createConfig<T>(config: Config<T>) {
+    return {
+        ...config,
+        timestamp: new Date()
+    };
+}
+const numberConfig = createConfig({
+    data: 42,
+    validate: (n: number) => n > 0
+});
+\`\`\`
+    `;
+    content.innerHTML = md.render(markdown);
+  }
+  
+  // 评论展开收起
+  const replies = document.querySelectorAll('.reply-toggle');
+  replies.forEach(reply => {
+    reply.addEventListener('click', function() {
+      const replyContent = this.nextElementSibling;
+      replyContent.classList.toggle('hidden');
+    });
+  });
+}
+</script>
+<style>
+.markdown-body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+.markdown-body h1 {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+.markdown-body h2 {
+  font-size: 1.5em;
+  margin: 1em 0;
+}
+.markdown-body code {
+  background: #f6f8fa;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+.markdown-body pre {
+  background: #f6f8fa;
+  padding: 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+.toc-link.active {
+  color: #3B82F6;
+  font-weight: bold;
+}
+</style>
+<style>
+body {
+min-height: 1024px;
+}
+.hero-bg {
+background-image: url('https://ai-public.mastergo.com/ai/img_res/18cc6a2adb2c3562e7a0c2773e8807b1.jpg');
+background-size: cover;
+background-position: center;
+}
+.article-card:hover {
+transform: translateY(-4px);
+transition: all 0.3s ease;
+}
+header {
+transition: all 0.3s ease;
+}
+header.scrolled {
+background: rgba(255, 255, 255, 0.9);
+backdrop-filter: blur(10px);
+}
+.logo-text {
+font-family: 'Pacifico', serif;
+background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: gradient 3s ease infinite;
+background-size: 200% 200%;
+}
+@keyframes gradient {
+0% {
+background-position: 0% 50%;
+}
+50% {
+background-position: 100% 50%;
+}
+100% {
+background-position: 0% 50%;
+}
+}
+</style>
+<script>
+window.addEventListener('scroll', function() {
+const header = document.querySelector('header');
+if (window.scrollY > 50) {
+header.classList.add('scrolled');
+} else {
+header.classList.remove('scrolled');
+}
+});
+</script>
+</head>
+<body class="bg-gray-50">
+<header class="fixed w-full bg-white shadow-sm z-50">
+<div class="container mx-auto px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<h1 class="text-3xl font-['Pacifico'] mr-12 logo-text">TechShare</h1>
+<nav class="hidden md:flex space-x-8">
+<a href="#" class="text-gray-800 hover:text-primary">首页</a>
+<a href="#" class="text-gray-800 hover:text-primary">文章</a>
+<a href="#" class="text-gray-800 hover:text-primary">教程</a>
+<a href="#" class="text-gray-800 hover:text-primary">接单专区</a>
+<a href="#" class="text-gray-800 hover:text-primary">关于我们</a>
+</nav>
+</div>
+<div class="flex items-center space-x-6">
+<div class="relative">
+<input type="text" placeholder="搜索文章..." class="pl-10 pr-4 py-2 w-64 border border-gray-200 rounded-button focus:outline-none focus:border-primary">
+<i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+</div>
+<button class="px-6 py-2 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">登录</button>
+<button class="px-6 py-2 border border-primary text-primary rounded-button hover:bg-blue-50 whitespace-nowrap">注册</button>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-16 bg-gray-50">
+<div class="container mx-auto px-4 py-8">
+  <div class="flex flex-col lg:flex-row gap-8">
+    <!-- 左侧文章内容 -->
+    <div class="lg:w-3/4">
+      <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <div class="p-8">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center space-x-4">
+              <img src="https://ai-public.mastergo.com/ai/img_res/8a285fe0a2be782368cc154ab51ddf80.jpg" 
+                   class="w-12 h-12 rounded-full" alt="作者头像">
+              <div>
+                <h4 class="font-medium">刘伟明</h4>
+                <div class="flex items-center text-sm text-gray-500">
+                  <span>2024-01-16</span>
+                  <span class="mx-2">·</span>
+                  <span>阅读 3,245</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <button class="px-4 py-2 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">
+                <i class="far fa-heart mr-2"></i>点赞
+              </button>
+              <button class="px-4 py-2 border border-gray-200 rounded-button hover:border-primary hover:text-primary whitespace-nowrap">
+                <i class="far fa-bookmark mr-2"></i>收藏
+              </button>
+            </div>
+          </div>
+          
+          <h1 class="text-3xl font-bold mb-6">TypeScript 4.5 新特性详解：提升类型系统的强大能力</h1>
+          
+          <div class="flex items-center space-x-2 mb-8">
+            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">TypeScript</span>
+            <span class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm">前端开发</span>
+          </div>
+          <!-- Markdown 内容 -->
+          <div id="article-content" class="markdown-body prose max-w-none"></div>
+          <!-- 文章底部信息 -->
+          <div class="mt-8 pt-8 border-t border-gray-100">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-8 text-gray-500">
+                <span><i class="far fa-eye mr-2"></i>3,245 阅读</span>
+                <span><i class="far fa-heart mr-2"></i>256 点赞</span>
+                <span><i class="far fa-comment mr-2"></i>48 评论</span>
+              </div>
+              <div class="flex items-center space-x-4">
+                <button class="px-4 py-2 bg-gray-100 rounded-button hover:bg-gray-200 whitespace-nowrap">
+                  <i class="fas fa-share-alt mr-2"></i>分享
+                </button>
+                <button class="px-4 py-2 bg-gray-100 rounded-button hover:bg-gray-200 whitespace-nowrap">
+                  <i class="fas fa-flag mr-2"></i>举报
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- 评论区 -->
+      <div class="mt-8 bg-white rounded-lg shadow-sm p-6">
+        <h3 class="text-xl font-bold mb-6">评论 (48)</h3>
+        
+        <!-- 评论输入框 -->
+        <div class="flex items-start space-x-4 mb-8">
+          <img src="https://ai-public.mastergo.com/ai/img_res/d1df6f1813c9cf8b7adfc1fd1361184f.jpg" 
+               class="w-10 h-10 rounded-full" alt="用户头像">
+          <div class="flex-1">
+            <textarea class="w-full p-4 border border-gray-200 rounded-lg focus:outline-none focus:border-primary" 
+                      rows="3" 
+                      placeholder="写下你的评论..."></textarea>
+            <div class="flex items-center justify-between mt-4">
+              <div class="flex items-center space-x-4">
+                <button class="p-2 text-gray-500 hover:text-primary">
+                  <i class="far fa-image"></i>
+                </button>
+                <button class="p-2 text-gray-500 hover:text-primary">
+                  <i class="far fa-smile"></i>
+                </button>
+              </div>
+              <button class="px-6 py-2 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">
+                发布评论
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- 评论列表 -->
+        <div class="space-y-6">
+          <!-- 评论 1 -->
+          <div class="flex space-x-4">
+            <img src="https://ai-public.mastergo.com/ai/img_res/19f5f828d507696761ed947c0d049f9d.jpg" 
+                 class="w-10 h-10 rounded-full" alt="评论者头像">
+            <div class="flex-1">
+              <div class="bg-gray-50 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <div>
+                    <span class="font-medium mr-2">张雪琪</span>
+                    <span class="text-gray-500 text-sm">高级前端工程师</span>
+                  </div>
+                  <span class="text-sm text-gray-500">2小时前</span>
+                </div>
+                <p class="text-gray-800 mb-4">非常详细的解析！特别是关于条件类型中的 tail-recursion 优化这部分，帮我解决了很多之前遇到的问题。期待能看到更多类似的技术分享。</p>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-4">
+                    <button class="text-gray-500 hover:text-primary">
+                      <i class="far fa-heart mr-1"></i>
+                      <span>34</span>
+                    </button>
+                    <button class="text-gray-500 hover:text-primary reply-toggle">
+                      <i class="far fa-comment mr-1"></i>
+                      <span>回复</span>
+                    </button>
+                  </div>
+                </div>
+                <!-- 回复框 -->
+                <div class="hidden mt-4">
+                  <div class="flex items-start space-x-4">
+                    <img src="https://ai-public.mastergo.com/ai/img_res/a679a3d0d95f5ae75ba9242f7aab833f.jpg" 
+                         class="w-8 h-8 rounded-full" alt="用户头像">
+                    <div class="flex-1">
+                      <textarea class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:border-primary" 
+                                rows="2" 
+                                placeholder="回复 @张雪琪..."></textarea>
+                      <div class="flex justify-end mt-2">
+                        <button class="px-4 py-1 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">
+                          回复
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 评论 2 -->
+          <div class="flex space-x-4">
+            <img src="https://ai-public.mastergo.com/ai/img_res/8cf31c44ed425ac319e78507616a9cea.jpg" 
+                 class="w-10 h-10 rounded-full" alt="评论者头像">
+            <div class="flex-1">
+              <div class="bg-gray-50 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <div>
+                    <span class="font-medium mr-2">王浩然</span>
+                    <span class="text-gray-500 text-sm">资深工程师</span>
+                  </div>
+                  <span class="text-sm text-gray-500">4小时前</span>
+                </div>
+                <p class="text-gray-800 mb-4">关于新的装饰器语法这部分写得很好，不过建议可以再补充一些实际的使用场景和性能优化的建议。</p>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-4">
+                    <button class="text-gray-500 hover:text-primary">
+                      <i class="far fa-heart mr-1"></i>
+                      <span>28</span>
+                    </button>
+                    <button class="text-gray-500 hover:text-primary reply-toggle">
+                      <i class="far fa-comment mr-1"></i>
+                      <span>回复</span>
+                    </button>
+                  </div>
+                </div>
+                <!-- 回复框 -->
+                <div class="hidden mt-4">
+                  <div class="flex items-start space-x-4">
+                    <img src="https://mastergo.com/ai/api/search-image?query=professional20asian20male20headshot,20casual20style,20neutral20background,20friendly20look&width=32&height=32&orientation=squarish" 
+                         class="w-8 h-8 rounded-full" alt="用户头像">
+                    <div class="flex-1">
+                      <textarea class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:border-primary" 
+                                rows="2" 
+                                placeholder="回复 @王浩然..."></textarea>
+                      <div class="flex justify-end mt-2">
+                        <button class="px-4 py-1 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">
+                          回复
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 右侧边栏 -->
+    <div class="lg:w-1/4 space-y-6">
+      <!-- 作者信息 -->
+      <div class="bg-white rounded-lg shadow-sm p-6">
+        <div class="flex items-center space-x-4 mb-4">
+          <img src="https://ai-public.mastergo.com/ai/img_res/7370471d79b5f5bce42aabd26492e907.jpg" 
+               class="w-20 h-20 rounded-full" alt="作者头像">
+          <div>
+            <h4 class="text-xl font-bold">刘伟明</h4>
+            <p class="text-gray-500">资深架构师</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between mb-4 text-sm text-gray-500">
+          <span>文章 128</span>
+          <span>粉丝 12.5k</span>
+          <span>获赞 89.2k</span>
+        </div>
+        <button class="w-full py-2 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">
+          <i class="fas fa-plus mr-2"></i>关注
+        </button>
+      </div>
+      <!-- 目录 -->
+      <div class="bg-white rounded-lg shadow-sm p-6">
+        <h4 class="font-bold mb-4">目录</h4>
+        <nav class="space-y-2">
+          <a href="#" class="block text-gray-600 hover:text-primary toc-link active">1. 条件类型中的 tail-recursion 优化</a>
+          <a href="#" class="block text-gray-600 hover:text-primary toc-link">2. 新的装饰器语法</a>
+          <a href="#" class="block text-gray-600 hover:text-primary toc-link">3. 导入断言</a>
+          <a href="#" class="block text-gray-600 hover:text-primary toc-link">4. 模板字符串类型改进</a>
+          <a href="#" class="block text-gray-600 hover:text-primary toc-link">5. 实践建议</a>
+        </nav>
+      </div>
+      <!-- 相关文章 -->
+      <div class="bg-white rounded-lg shadow-sm p-6">
+        <h4 class="font-bold mb-4">相关文章</h4>
+        <div class="space-y-4">
+          <a href="#" class="block hover:bg-gray-50 p-2 rounded">
+            <h5 class="font-medium mb-2 line-clamp-2">TypeScript 5.0 新特性抢先看：新增特性与改进详解</h5>
+            <div class="flex items-center text-sm text-gray-500">
+              <span>2,891 阅读</span>
+              <span class="mx-2">·</span>
+              <span>3天前</span>
+            </div>
+          </a>
+          <a href="#" class="block hover:bg-gray-50 p-2 rounded">
+            <h5 class="font-medium mb-2 line-clamp-2">TypeScript 高级类型实战：打造类型安全的应用</h5>
+            <div class="flex items-center text-sm text-gray-500">
+              <span>3,567 阅读</span>
+              <span class="mx-2">·</span>
+              <span>5天前</span>
+            </div>
+          </a>
+          <a href="#" class="block hover:bg-gray-50 p-2 rounded">
+            <h5 class="font-medium mb-2 line-clamp-2">从零开始：TypeScript 项目最佳实践指南</h5>
+            <div class="flex items-center text-sm text-gray-500">
+              <span>4,123 阅读</span>
+              <span class="mx-2">·</span>
+              <span>1周前</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer class="bg-gray-900 text-gray-400 py-16">
+<div class="container mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+<div>
+<h1 class="text-3xl font-['Pacifico'] mb-6 logo-text">TechShare</h1>
+<p class="mb-4">分享技术，连接未来。在这里，与千万开发者一起成长。</p>
+<div class="flex space-x-4">
+<a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-github text-xl"></i></a>
+<a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+<a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-xl"></i></a>
+</div>
+</div>
+<div>
+<h4 class="text-white text-lg font-bold mb-6">快速链接</h4>
+<ul class="space-y-3">
+<li><a href="#" class="hover:text-white">首页</a></li>
+<li><a href="#" class="hover:text-white">文章</a></li>
+<li><a href="#" class="hover:text-white">教程</a></li>
+<li><a href="#" class="hover:text-white">接单专区</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white text-lg font-bold mb-6">帮助支持</h4>
+<ul class="space-y-3">
+<li><a href="#" class="hover:text-white">帮助中心</a></li>
+<li><a href="#" class="hover:text-white">联系我们</a></li>
+<li><a href="#" class="hover:text-white">用户协议</a></li>
+<li><a href="#" class="hover:text-white">隐私政策</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white text-lg font-bold mb-6">联系我们</h4>
+<ul class="space-y-3">
+<li><i class="far fa-envelope mr-2"></i>contact@example.com</li>
+<li><i class="far fa-phone mr-2"></i>400-123-4567</li>
+<li><i class="far fa-map-marker-alt mr-2"></i>北京市朝阳区科技园区</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-12 pt-8 text-center">
+<p>&copy; 2024 博客平台. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body>
+</html>

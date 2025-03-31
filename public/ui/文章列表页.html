@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>博客平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#3B82F6',
+secondary: '#10B981'
+},
+borderRadius: {
+'none': '0px',
+'sm': '2px',
+DEFAULT: '4px',
+'md': '8px',
+'lg': '12px',
+'xl': '16px',
+'2xl': '20px',
+'3xl': '24px',
+'full': '9999px',
+'button': '4px'
+}
+}
+}
+}
+</script>
+<style>
+body {
+min-height: 1024px;
+}
+.hero-bg {
+background-image: url('https://ai-public.mastergo.com/ai/img_res/18cc6a2adb2c3562e7a0c2773e8807b1.jpg');
+background-size: cover;
+background-position: center;
+}
+.article-card:hover {
+transform: translateY(-4px);
+transition: all 0.3s ease;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<header class="fixed w-full bg-white shadow-sm z-50">
+<div class="container mx-auto px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<h1 class="text-3xl font-['Pacifico'] text-primary mr-12">logo</h1>
+<nav class="hidden md:flex space-x-8">
+<a href="#" class="text-gray-800 hover:text-primary">首页</a>
+<a href="#" class="text-gray-800 hover:text-primary">文章</a>
+<a href="#" class="text-gray-800 hover:text-primary">教程</a>
+<a href="#" class="text-gray-800 hover:text-primary">接单专区</a>
+<a href="#" class="text-gray-800 hover:text-primary">关于我们</a>
+</nav>
+</div>
+<div class="flex items-center space-x-6">
+<div class="relative">
+<input type="text" placeholder="搜索文章..." class="pl-10 pr-4 py-2 w-64 border border-gray-200 rounded-button focus:outline-none focus:border-primary">
+<i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+</div>
+<button class="px-6 py-2 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">登录</button>
+<button class="px-6 py-2 border border-primary text-primary rounded-button hover:bg-blue-50 whitespace-nowrap">注册</button>
+</div>
+</div>
+</div>
+</header>
+<main>
+
+<section class="py-20 bg-gray-50">
+<div class="container mx-auto px-6">
+<div class="flex justify-between mb-8">
+<h2 class="text-3xl font-bold">最新文章</h2>
+<div class="flex items-center space-x-4">
+<button class="px-4 py-2 bg-white border border-gray-200 rounded-button text-gray-600 hover:border-primary hover:text-primary whitespace-nowrap">
+<i class="fas fa-th-large mr-2"></i>网格视图
+</button>
+<button class="px-4 py-2 bg-white border border-gray-200 rounded-button text-gray-600 hover:border-primary hover:text-primary whitespace-nowrap">
+<i class="fas fa-list mr-2"></i>列表视图
+</button>
+<div class="relative">
+<button class="px-4 py-2 bg-white border border-gray-200 rounded-button text-gray-600 hover:border-primary hover:text-primary whitespace-nowrap">
+<i class="fas fa-filter mr-2"></i>筛选
+</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+<div class="lg:col-span-3">
+<div class="grid grid-cols-1 gap-8">
+<article class="bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="flex flex-col md:flex-row">
+<img src="https://ai-public.mastergo.com/ai/img_res/093a1e51cea23ffe9f95013ee89dfda6.jpg" class="md:w-72 h-60 object-cover" alt="文章封面">
+<div class="p-6 flex-1">
+<div class="flex items-center mb-4">
+<img src="https://ai-public.mastergo.com/ai/img_res/7d1b2dc9d862f7105d305e061aac8a3a.jpg" class="w-10 h-10 rounded-full mr-3" alt="作者头像">
+<div>
+<h4 class="font-medium">刘伟明</h4>
+<p class="text-sm text-gray-500">资深架构师 · 2024-01-16</p>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-3 hover:text-primary">深入理解 TypeScript 高级特性</h3>
+<p class="text-gray-600 mb-4 line-clamp-3">本文将深入探讨 TypeScript 的高级特性，包括类型体操、泛型工具类型、装饰器模式等进阶用法，帮助开发者更好地利用 TypeScript 构建健壮的应用程序。</p>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center space-x-4 text-gray-500">
+<span><i class="far fa-eye mr-1"></i>3,245</span>
+<span><i class="far fa-heart mr-1"></i>256</span>
+<span><i class="far fa-comment mr-1"></i>48</span>
+</div>
+<div class="flex space-x-2">
+<span class="px-2 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">TypeScript</span>
+<span class="px-2 py-1 bg-purple-100 text-purple-600 rounded-full text-xs">前端开发</span>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="flex flex-col md:flex-row">
+<img src="https://ai-public.mastergo.com/ai/img_res/fe96a72e53daa571d4005f212d3946cd.jpg" class="md:w-72 h-60 object-cover" alt="文章封面">
+<div class="p-6 flex-1">
+<div class="flex items-center mb-4">
+<img src="https://ai-public.mastergo.com/ai/img_res/bb81db2e465953d457ba7cdb9c05364d.jpg" class="w-10 h-10 rounded-full mr-3" alt="作者头像">
+<div>
+<h4 class="font-medium">周雨萱</h4>
+<p class="text-sm text-gray-500">云计算专家 · 2024-01-15</p>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-3 hover:text-primary">Kubernetes 服务网格实践指南</h3>
+<p class="text-gray-600 mb-4 line-clamp-3">探索服务网格在 Kubernetes 集群中的最佳实践，包括 Istio 的部署配置、流量管理、安全策略等关键内容，助力团队构建可靠的微服务架构。</p>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center space-x-4 text-gray-500">
+<span><i class="far fa-eye mr-1"></i>2,876</span>
+<span><i class="far fa-heart mr-1"></i>198</span>
+<span><i class="far fa-comment mr-1"></i>35</span>
+</div>
+<div class="flex space-x-2">
+<span class="px-2 py-1 bg-green-100 text-green-600 rounded-full text-xs">Kubernetes</span>
+<span class="px-2 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">云原生</span>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="bg-white rounded-lg shadow-sm overflow-hidden">
+<div class="flex flex-col md:flex-row">
+<img src="https://ai-public.mastergo.com/ai/img_res/958f02073282dd58333efcd9b70b28d3.jpg" class="md:w-72 h-60 object-cover" alt="文章封面">
+<div class="p-6 flex-1">
+<div class="flex items-center mb-4">
+<img src="https://ai-public.mastergo.com/ai/img_res/a608a6c7440b5b0aa3d6338b7275fa4e.jpg" class="w-10 h-10 rounded-full mr-3" alt="作者头像">
+<div>
+<h4 class="font-medium">王梓晴</h4>
+<p class="text-sm text-gray-500">高级UI设计师 · 2024-01-14</p>
+</div>
+</div>
+<h3 class="text-xl font-bold mb-3 hover:text-primary">设计系统构建与维护指南</h3>
+<p class="text-gray-600 mb-4 line-clamp-3">分享如何从零开始构建一个完整的设计系统，包括组件库设计、样式指南制定、设计标准化流程等内容，助力团队提升设计效率和一致性。</p>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center space-x-4 text-gray-500">
+<span><i class="far fa-eye mr-1"></i>2,156</span>
+<span><i class="far fa-heart mr-1"></i>167</span>
+<span><i class="far fa-comment mr-1"></i>29</span>
+</div>
+<div class="flex space-x-2">
+<span class="px-2 py-1 bg-red-100 text-red-600 rounded-full text-xs">UI设计</span>
+<span class="px-2 py-1 bg-yellow-100 text-yellow-600 rounded-full text-xs">设计系统</span>
+</div>
+</div>
+</div>
+</div>
+</article>
+<div class="flex justify-center mt-8">
+<button class="px-4 py-2 bg-white border border-gray-200 rounded-button text-gray-600 hover:border-primary hover:text-primary whitespace-nowrap">
+加载更多
+</button>
+</div>
+</div>
+</div>
+<aside class="lg:col-span-1">
+<div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+<h3 class="font-bold mb-4">热门标签</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm cursor-pointer hover:bg-blue-200">JavaScript</span>
+<span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm cursor-pointer hover:bg-green-200">Python</span>
+<span class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm cursor-pointer hover:bg-purple-200">React</span>
+<span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm cursor-pointer hover:bg-red-200">Vue</span>
+<span class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm cursor-pointer hover:bg-yellow-200">Node.js</span>
+<span class="px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-sm cursor-pointer hover:bg-pink-200">Docker</span>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+<h3 class="font-bold mb-4">推荐作者</h3>
+<div class="space-y-4">
+<div class="flex items-center">
+<img src="https://ai-public.mastergo.com/ai/img_res/966e36e950eea096961383ea3e119bc7.jpg" class="w-10 h-10 rounded-full mr-3" alt="作者头像">
+<div class="flex-1">
+<h4 class="font-medium">李俊杰</h4>
+<p class="text-sm text-gray-500">技术总监</p>
+</div>
+<button class="px-3 py-1 border border-primary text-primary rounded-full text-sm hover:bg-primary hover:text-white whitespace-nowrap">关注</button>
+</div>
+<div class="flex items-center">
+<img src="https://ai-public.mastergo.com/ai/img_res/cde763aa5db12dabe64bd7f03b1279cd.jpg" class="w-10 h-10 rounded-full mr-3" alt="作者头像">
+<div class="flex-1">
+<h4 class="font-medium">张雪琪</h4>
+<p class="text-sm text-gray-500">高级工程师</p>
+</div>
+<button class="px-3 py-1 border border-primary text-primary rounded-full text-sm hover:bg-primary hover:text-white whitespace-nowrap">关注</button>
+</div>
+<div class="flex items-center">
+<img src="https://ai-public.mastergo.com/ai/img_res/d85211c323ca02e4a3fc0f02f0bd94d1.jpg" class="w-10 h-10 rounded-full mr-3" alt="作者头像">
+<div class="flex-1">
+<h4 class="font-medium">陈志远</h4>
+<p class="text-sm text-gray-500">架构师</p>
+</div>
+<button class="px-3 py-1 border border-primary text-primary rounded-full text-sm hover:bg-primary hover:text-white whitespace-nowrap">关注</button>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm p-6">
+<h3 class="font-bold mb-4">热门文章</h3>
+<div class="space-y-4">
+<div class="flex items-start">
+<span class="text-lg font-bold text-primary mr-3">01</span>
+<div>
+<h4 class="font-medium mb-1 hover:text-primary cursor-pointer">深入浅出 Docker 容器化技术</h4>
+<p class="text-sm text-gray-500">3,678 次阅读</p>
+</div>
+</div>
+<div class="flex items-start">
+<span class="text-lg font-bold text-primary mr-3">02</span>
+<div>
+<h4 class="font-medium mb-1 hover:text-primary cursor-pointer">React Hooks 最佳实践指南</h4>
+<p class="text-sm text-gray-500">2,891 次阅读</p>
+</div>
+</div>
+<div class="flex items-start">
+<span class="text-lg font-bold text-primary mr-3">03</span>
+<div>
+<h4 class="font-medium mb-1 hover:text-primary cursor-pointer">微服务架构设计原则</h4>
+<p class="text-sm text-gray-500">2,567 次阅读</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-gray-900 text-gray-400 py-20">
+<div class="container mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+<div>
+<h1 class="text-3xl font-['Pacifico'] text-white mb-6">logo</h1>
+<p class="mb-4">分享技术，连接未来。在这里，与千万开发者一起成长。</p>
+<div class="flex space-x-4">
+<a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-github text-xl"></i></a>
+<a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+<a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-xl"></i></a>
+</div>
+</div>
+<div>
+<h4 class="text-white text-lg font-bold mb-6">快速链接</h4>
+<ul class="space-y-3">
+<li><a href="#" class="hover:text-white">首页</a></li>
+<li><a href="#" class="hover:text-white">文章</a></li>
+<li><a href="#" class="hover:text-white">教程</a></li>
+<li><a href="#" class="hover:text-white">接单专区</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white text-lg font-bold mb-6">帮助支持</h4>
+<ul class="space-y-3">
+<li><a href="#" class="hover:text-white">帮助中心</a></li>
+<li><a href="#" class="hover:text-white">联系我们</a></li>
+<li><a href="#" class="hover:text-white">用户协议</a></li>
+<li><a href="#" class="hover:text-white">隐私政策</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white text-lg font-bold mb-6">联系我们</h4>
+<ul class="space-y-3">
+<li><i class="far fa-envelope mr-2"></i>contact@example.com</li>
+<li><i class="far fa-phone mr-2"></i>400-123-4567</li>
+<li><i class="far fa-map-marker-alt mr-2"></i>北京市朝阳区科技园区</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-12 pt-8 text-center">
+<p>&copy; 2024 博客平台. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body>
+</html>

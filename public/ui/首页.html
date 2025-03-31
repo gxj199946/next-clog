@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客平台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '2px',
+                        DEFAULT: '4px',
+                        'md': '8px',
+                        'lg': '12px',
+                        'xl': '16px',
+                        '2xl': '20px',
+                        '3xl': '24px',
+                        'full': '9999px',
+                        'button': '4px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            min-height: 1024px;
+        }
+        .hero-bg {
+            background-image: url('https://ai-public.mastergo.com/ai/img_res/18cc6a2adb2c3562e7a0c2773e8807b1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .article-card:hover {
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="fixed w-full bg-white shadow-sm z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <h1 class="text-3xl font-['Pacifico'] text-primary mr-12">logo</h1>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="#" class="text-gray-800 hover:text-primary">首页</a>
+                        <a href="#" class="text-gray-800 hover:text-primary">文章</a>
+                        <a href="#" class="text-gray-800 hover:text-primary">教程</a>
+                        <a href="#" class="text-gray-800 hover:text-primary">接单专区</a>
+                        <a href="#" class="text-gray-800 hover:text-primary">关于我们</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <div class="relative">
+                        <input type="text" placeholder="搜索文章..." class="pl-10 pr-4 py-2 w-64 border border-gray-200 rounded-button focus:outline-none focus:border-primary">
+                        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                    <button class="px-6 py-2 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">登录</button>
+                    <button class="px-6 py-2 border border-primary text-primary rounded-button hover:bg-blue-50 whitespace-nowrap">注册</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-bg pt-32 pb-20">
+            <div class="container mx-auto px-6">
+                <div class="max-w-2xl text-white">
+                    <h2 class="text-5xl font-bold mb-6">分享技术，连接未来</h2>
+                    <p class="text-xl mb-8 opacity-90">在这里，与千万开发者一起成长。分享你的技术见解，获取最新行业动态，找到志同道合的伙伴。</p>
+                    <button class="px-8 py-3 bg-primary text-white rounded-button text-lg hover:bg-blue-600 whitespace-nowrap">开始写作</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl font-bold mb-12 text-center">精选内容</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <article class="article-card bg-white rounded-lg shadow-sm overflow-hidden">
+                        <img src="https://ai-public.mastergo.com/ai/img_res/ee8da9d49c241e621ab6244d88cc9891.jpg" class="w-full h-48 object-cover" alt="文章封面">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <img src="https://ai-public.mastergo.com/ai/img_res/8cce18c9b4b2d919bd0dc6e15c6b1cd5.jpg" class="w-10 h-10 rounded-full mr-3" alt="作者头像">
+                                <div>
+                                    <h4 class="font-medium">陈志远</h4>
+                                    <p class="text-sm text-gray-500">前端开发工程师</p>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 hover:text-primary">Vue 3 组合式 API 最佳实践指南</h3>
+                            <p class="text-gray-600 mb-4 line-clamp-2">深入探讨 Vue 3 组合式 API 的使用技巧，包括响应式系统、生命周期钩子、依赖注入等核心概念的最佳实践方案。</p>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>2024-01-15</span>
+                                <div class="flex items-center space-x-4">
+                                    <span><i class="far fa-eye mr-1"></i>2,356</span>
+                                    <span><i class="far fa-heart mr-1"></i>189</span>
+                                    <span><i class="far fa-comment mr-1"></i>45</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="article-card bg-white rounded-lg shadow-sm overflow-hidden">
+                        <img src="https://ai-public.mastergo.com/ai/img_res/5088ec613629d8703f9ca63c8fb9a475.jpg" class="w-full h-48 object-cover" alt="文章封面">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <img src="https://ai-public.mastergo.com/ai/img_res/1ccd3a0475619eb4d46ef09ed708d375.jpg" class="w-10 h-10 rounded-full mr-3" alt="作者头像">
+                                <div>
+                                    <h4 class="font-medium">林雨晴</h4>
+                                    <p class="text-sm text-gray-500">全栈开发工程师</p>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 hover:text-primary">Node.js 微服务架构实战</h3>
+                            <p class="text-gray-600 mb-4 line-clamp-2">详细讲解如何使用 Node.js 构建可扩展的微服务架构，包括服务发现、负载均衡、容错处理等关键技术点。</p>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>2024-01-14</span>
+                                <div class="flex items-center space-x-4">
+                                    <span><i class="far fa-eye mr-1"></i>1,892</span>
+                                    <span><i class="far fa-heart mr-1"></i>156</span>
+                                    <span><i class="far fa-comment mr-1"></i>38</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="article-card bg-white rounded-lg shadow-sm overflow-hidden">
+                        <img src="https://ai-public.mastergo.com/ai/img_res/26b37f639709e465ce7275832748dd56.jpg" class="w-full h-48 object-cover" alt="文章封面">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <img src="https://ai-public.mastergo.com/ai/img_res/7ea8ffc1fb07e740f7e5469936fa41a9.jpg" class="w-10 h-10 rounded-full mr-3" alt="作者头像">
+                                <div>
+                                    <h4 class="font-medium">张明辉</h4>
+                                    <p class="text-sm text-gray-500">UI/UX 设计师</p>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 hover:text-primary">移动端 UI 设计原则与实践</h3>
+                            <p class="text-gray-600 mb-4 line-clamp-2">探讨移动端 UI 设计的核心原则，从用户体验、交互设计到视觉呈现，全方位提升设计水平。</p>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>2024-01-13</span>
+                                <div class="flex items-center space-x-4">
+                                    <span><i class="far fa-eye mr-1"></i>1,567</span>
+                                    <span><i class="far fa-heart mr-1"></i>134</span>
+                                    <span><i class="far fa-comment mr-1"></i>29</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl font-bold mb-12 text-center">热门分类</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="bg-white rounded-lg p-6 text-center hover:shadow-md transition-shadow">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-code text-primary text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">前端开发</h4>
+                        <p class="text-gray-600">238 篇文章</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-6 text-center hover:shadow-md transition-shadow">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-server text-green-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">后端开发</h4>
+                        <p class="text-gray-600">195 篇文章</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-6 text-center hover:shadow-md transition-shadow">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-mobile-alt text-purple-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">移动开发</h4>
+                        <p class="text-gray-600">167 篇文章</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-6 text-center hover:shadow-md transition-shadow">
+                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-paint-brush text-red-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">UI 设计</h4>
+                        <p class="text-gray-600">142 篇文章</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl font-bold mb-12 text-center">平台数据</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-primary mb-2">125,678</div>
+                        <p class="text-gray-600">注册用户</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-primary mb-2">45,892</div>
+                        <p class="text-gray-600">技术文章</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-primary mb-2">8,567</div>
+                        <p class="text-gray-600">活跃作者</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-primary mb-2">2,345</div>
+                        <p class="text-gray-600">接单项目</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl font-bold mb-12 text-center">最新教程</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <img src="https://ai-public.mastergo.com/ai/img_res/58884b07717100abf6dc5acd5d8fb09a.jpg" class="w-full h-48 object-cover" alt="教程封面">
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold mb-4">React 18 完全指南</h4>
+                            <p class="text-gray-600 mb-4">从基础到高级，全面掌握 React 18 的新特性和最佳实践</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-500">12 课时</span>
+                                <button class="px-4 py-2 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">开始学习</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <img src="https://ai-public.mastergo.com/ai/img_res/5def41ab458477ff5eaa3daab5b20d4c.jpg" class="w-full h-48 object-cover" alt="教程封面">
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold mb-4">云原生架构实战</h4>
+                            <p class="text-gray-600 mb-4">深入理解云原生架构，掌握容器化和微服务部署技术</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-500">16 课时</span>
+                                <button class="px-4 py-2 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">开始学习</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <img src="https://ai-public.mastergo.com/ai/img_res/973c99ac887d07f0c3f18aa2a38555f4.jpg" class="w-full h-48 object-cover" alt="教程封面">
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold mb-4">机器学习入门到精通</h4>
+                            <p class="text-gray-600 mb-4">系统学习机器学习算法，实战数据分析项目</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-500">20 课时</span>
+                                <button class="px-4 py-2 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">开始学习</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl font-bold mb-12 text-center">接单专区</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-primary rounded-full text-sm">Web 开发</span>
+                            <span class="text-lg font-bold text-primary">￥15,000</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">企业官网开发项目</h4>
+                        <p class="text-gray-600 mb-4">需要开发一个现代化的企业官网，要求响应式设计，包含产品展示、新闻资讯等功能模块</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-clock mr-1"></i>预计 20 天</span>
+                            <span><i class="far fa-user mr-1"></i>已有 8 人投标</span>
+                        </div>
+                        <button class="w-full py-2 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">立即投标</button>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">小程序开发</span>
+                            <span class="text-lg font-bold text-primary">￥20,000</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">社交电商小程序</h4>
+                        <p class="text-gray-600 mb-4">开发一个社交电商小程序，需要包含商品展示、购物车、订单管理、用户社交等功能</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-clock mr-1"></i>预计 30 天</span>
+                            <span><i class="far fa-user mr-1"></i>已有 12 人投标</span>
+                        </div>
+                        <button class="w-full py-2 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">立即投标</button>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm">UI 设计</span>
+                            <span class="text-lg font-bold text-primary">￥8,000</span>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">移动应用 UI 设计</h4>
+                        <p class="text-gray-600 mb-4">为一款健康管理 APP 设计界面，需要符合现代设计趋势，注重用户体验</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-clock mr-1"></i>预计 15 天</span>
+                            <span><i class="far fa-user mr-1"></i>已有 6 人投标</span>
+                        </div>
+                        <button class="w-full py-2 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">立即投标</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-20">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <h1 class="text-3xl font-['Pacifico'] text-white mb-6">logo</h1>
+                    <p class="mb-4">分享技术，连接未来。在这里，与千万开发者一起成长。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-github text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-xl"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-bold mb-6">快速链接</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white">首页</a></li>
+                        <li><a href="#" class="hover:text-white">文章</a></li>
+                        <li><a href="#" class="hover:text-white">教程</a></li>
+                        <li><a href="#" class="hover:text-white">接单专区</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-bold mb-6">帮助支持</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white">帮助中心</a></li>
+                        <li><a href="#" class="hover:text-white">联系我们</a></li>
+                        <li><a href="#" class="hover:text-white">用户协议</a></li>
+                        <li><a href="#" class="hover:text-white">隐私政策</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-bold mb-6">联系我们</h4>
+                    <ul class="space-y-3">
+                        <li><i class="far fa-envelope mr-2"></i>contact@example.com</li>
+                        <li><i class="far fa-phone mr-2"></i>400-123-4567</li>
+                        <li><i class="far fa-map-marker-alt mr-2"></i>北京市朝阳区科技园区</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p>&copy; 2024 博客平台. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

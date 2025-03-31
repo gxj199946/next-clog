@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文章详情 - TechShare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js"></script>
+<script>
+window.onload = function() {
+const md = window.markdownit();
+const content = document.getElementById('article-content');
+if(content) {
+const markdown = `
+# TypeScript 4.5 新特性详解
+## 1. 条件类型中的 tail-recursion 优化
+TypeScript 4.5 优化了条件类型中的尾递归，这使得我们可以处理更深层次的递归而不会导致堆栈溢出。
+\`\`\`typescript
+type InfiniteList<T> = [T, ...InfiniteList<T>];
+type Take<N extends number, T extends any[]> = T extends []
+? []
+: N extends 0
+? []
+: T extends [infer First, ...infer Rest]
+? [First, ...Take<Subtract<N, 1>, Rest>]
+: [];
+\`\`\`
+## 2. 新的装饰器语法
+装饰器现在支持类字段和访问器：
+\`\`\`typescript
+class Example {
+@log
+private value: string;
+@logAccess
+get computedValue() {
+return this.value.toUpperCase();
+}
+}
+\`\`\`
+## 3. 导入断言
+现在可以在导入语句中使用类型断言：
+\`\`\`typescript
+import { something } from "./something.json" assert { type: "json" };
+\`\`\`
+## 4. 模板字符串类型改进
+支持更复杂的模板字符串类型操作：
+\`\`\`typescript
+type Color = "red" | "blue";
+type Quantity = "one" | "two";
+type SemanticColors = \`\${Quantity}-\${Color}\`; // "one-red" | "one-blue" | "two-red" | "two-blue"
+\`\`\`
+## 5. 实践建议
+1. 在大型项目中合理使用条件类型
+2. 注意装饰器的性能影响
+3. 使用模板字符串类型提高代码可维护性
+## 总结
+TypeScript 4.5 带来了多项重要更新，这些新特性将帮助我们编写更清晰、更可靠的代码。
+### 代码示例
+\`\`\`typescript
+interface Config<T> {
+data: T;
+validate: (value: T) => boolean;
+}
+function createConfig<T>(config: Config<T>) {
+return {
+...config,
+timestamp: new Date()
+};
+}
+const numberConfig = createConfig({
+data: 42,
+validate: (n: number) => n > 0
+});
+\`\`\`
+`;
+content.innerHTML = md.render(markdown);
+}
+// 评论展开收起
+const replies = document.querySelectorAll('.reply-toggle');
+replies.forEach(reply => {
+reply.addEventListener('click', function() {
+const replyContent = this.nextElementSibling;
+replyContent.classList.toggle('hidden');
+});
+});
+}
+</script>
+<style>
+.markdown-body {
+font-size: 16px;
+line-height: 1.6;
+}
+.markdown-body h1 {
+font-size: 2em;
+margin-bottom: 1em;
+}
+.markdown-body h2 {
+font-size: 1.5em;
+margin: 1em 0;
+}
+.markdown-body code {
+background: #f6f8fa;
+padding: 0.2em 0.4em;
+border-radius: 3px;
+}
+.markdown-body pre {
+background: #f6f8fa;
+padding: 16px;
+border-radius: 6px;
+overflow-x: auto;
+}
+.toc-link.active {
+color: #3B82F6;
+font-weight: bold;
+}
+</style>
+<style>
+body {
+min-height: 100vh;
+background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+}
+.hero-bg {
+background-image: url('https://ai-public.mastergo.com/ai/img_res/18cc6a2adb2c3562e7a0c2773e8807b1.jpg');
+background-size: cover;
+background-position: center;
+}
+.article-card:hover {
+transform: translateY(-4px);
+transition: all 0.3s ease;
+}
+header {
+transition: all 0.3s ease;
+}
+header.scrolled {
+background: rgba(255, 255, 255, 0.9);
+backdrop-filter: blur(10px);
+}
+.logo-text {
+font-family: 'Pacifico', serif;
+background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: gradient 3s ease infinite;
+background-size: 200% 200%;
+}
+@keyframes gradient {
+0% {
+background-position: 0% 50%;
+}
+50% {
+background-position: 100% 50%;
+}
+100% {
+background-position: 0% 50%;
+}
+}
+</style>
+<script>
+window.addEventListener('scroll', function() {
+const header = document.querySelector('header');
+if (window.scrollY > 50) {
+header.classList.add('scrolled');
+} else {
+header.classList.remove('scrolled');
+}
+});
+</script>
+</head>
+<body class="bg-gray-50">
+<header class="fixed w-full bg-white shadow-sm z-50">
+<div class="container mx-auto px-6 py-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<h1 class="text-3xl font-['Pacifico'] mr-12 logo-text">TechShare</h1>
+<nav class="hidden md:flex space-x-8">
+<a href="#" class="text-gray-800 hover:text-primary">首页</a>
+<a href="#" class="text-gray-800 hover:text-primary">文章</a>
+<a href="#" class="text-gray-800 hover:text-primary">教程</a>
+<a href="#" class="text-gray-800 hover:text-primary">接单专区</a>
+<a href="#" class="text-gray-800 hover:text-primary">关于我们</a>
+</nav>
+</div>
+<div class="flex items-center space-x-6">
+<div class="relative">
+<input type="text" placeholder="搜索文章..." class="pl-10 pr-4 py-2 w-64 border border-gray-200 rounded-button focus:outline-none focus:border-primary">
+<i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+</div>
+<button class="px-6 py-2 bg-primary text-white rounded-button hover:bg-blue-600 whitespace-nowrap">登录</button>
+<button class="px-6 py-2 border border-primary text-primary rounded-button hover:bg-blue-50 whitespace-nowrap">注册</button>
+</div>
+</div>
+</div>
+</header>
+<main class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+
+
+<section class="py-20 bg-gradient-to-b from-gray-50 to-white">
+  <div class="container mx-auto px-6">
+    <div class="flex justify-between items-center mb-12">
+      <div>
+        <h2 class="text-3xl font-bold">精品课程</h2>
+        <p class="text-gray-600 mt-2">专业的技术教程，助你快速进阶</p>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div class="relative">
+          <input type="text" placeholder="搜索课程..." class="pl-10 pr-4 py-2 w-64 border border-gray-200 rounded-button focus:outline-none focus:border-primary">
+          <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+        </div>
+        <div class="flex bg-white rounded-button shadow-sm">
+          <button class="px-4 py-2 text-primary border-b-2 border-primary">全部</button>
+          <button class="px-4 py-2 text-gray-500 hover:text-primary">前端</button>
+          <button class="px-4 py-2 text-gray-500 hover:text-primary">后端</button>
+          <button class="px-4 py-2 text-gray-500 hover:text-primary">移动端</button>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- 课程卡片 1 -->
+      <div class="group bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow overflow-hidden">
+        <div class="relative">
+          <img src="https://ai-public.mastergo.com/ai/img_res/6735e191bf2d54a901d5fe653ef7a9c7.jpg" 
+               class="w-full h-48 object-cover" alt="课程封面">
+          <div class="absolute top-4 left-4 px-3 py-1 bg-primary bg-opacity-90 text-white rounded-full text-sm">
+            热门推荐
+          </div>
+          <div class="absolute bottom-4 right-4 flex items-center space-x-2">
+            <span class="px-2 py-1 bg-black bg-opacity-50 text-white rounded text-sm">
+              <i class="fas fa-play-circle mr-1"></i>24 课时
+            </span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center space-x-2 mb-3">
+            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">React.js</span>
+            <span class="px-2 py-1 bg-green-100 text-green-600 rounded-full text-xs">进阶</span>
+          </div>
+          <h4 class="text-xl font-bold mb-2 group-hover:text-primary">React 18 高级开发实战</h4>
+          <p class="text-gray-600 mb-4 line-clamp-2">
+            深入学习 React 18 新特性，掌握高阶组件、Hooks 进阶、性能优化等核心技能，打造高质量的前端应用。
+          </p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <img src="https://ai-public.mastergo.com/ai/img_res/24de2d3e887e4d518bdca9105b99be9d.jpg" 
+                   class="w-8 h-8 rounded-full" alt="讲师头像">
+              <div>
+                <p class="text-sm font-medium">陈志远</p>
+                <p class="text-xs text-gray-500">高级前端工程师</p>
+              </div>
+            </div>
+            <div class="text-primary font-bold">￥299</div>
+          </div>
+        </div>
+      </div>
+      <!-- 课程卡片 2 -->
+      <div class="group bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow overflow-hidden">
+        <div class="relative">
+          <img src="https://ai-public.mastergo.com/ai/img_res/4952120a8f1b05a8655d5e2a79e50ba3.jpg" 
+               class="w-full h-48 object-cover" alt="课程封面">
+          <div class="absolute top-4 left-4 px-3 py-1 bg-green-500 bg-opacity-90 text-white rounded-full text-sm">
+            新课上线
+          </div>
+          <div class="absolute bottom-4 right-4 flex items-center space-x-2">
+            <span class="px-2 py-1 bg-black bg-opacity-50 text-white rounded text-sm">
+              <i class="fas fa-play-circle mr-1"></i>32 课时
+            </span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center space-x-2 mb-3">
+            <span class="px-2 py-1 bg-cyan-100 text-cyan-600 rounded-full text-xs">微服务</span>
+            <span class="px-2 py-1 bg-orange-100 text-orange-600 rounded-full text-xs">实战</span>
+          </div>
+          <h4 class="text-xl font-bold mb-2 group-hover:text-primary">Spring Cloud 微服务架构实践</h4>
+          <p class="text-gray-600 mb-4 line-clamp-2">
+            从零开始搭建微服务架构，掌握服务注册、配置中心、网关路由、负载均衡等核心组件的使用。
+          </p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <img src="https://ai-public.mastergo.com/ai/img_res/14c6005410cdfbdd3eb135c8c83ae184.jpg" 
+                   class="w-8 h-8 rounded-full" alt="讲师头像">
+              <div>
+                <p class="text-sm font-medium">张雪琪</p>
+                <p class="text-xs text-gray-500">架构师</p>
+              </div>
+            </div>
+            <div class="text-primary font-bold">￥399</div>
+          </div>
+        </div>
+      </div>
+      <!-- 课程卡片 3 -->
+      <div class="group bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow overflow-hidden">
+        <div class="relative">
+          <img src="https://ai-public.mastergo.com/ai/img_res/1a812c10936276d775702f3b67bc5e60.jpg" 
+               class="w-full h-48 object-cover" alt="课程封面">
+          <div class="absolute top-4 left-4 px-3 py-1 bg-yellow-500 bg-opacity-90 text-white rounded-full text-sm">
+            限时特惠
+          </div>
+          <div class="absolute bottom-4 right-4 flex items-center space-x-2">
+            <span class="px-2 py-1 bg-black bg-opacity-50 text-white rounded text-sm">
+              <i class="fas fa-play-circle mr-1"></i>28 课时
+            </span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center space-x-2 mb-3">
+            <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded-full text-xs">Flutter</span>
+            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">跨平台</span>
+          </div>
+          <h4 class="text-xl font-bold mb-2 group-hover:text-primary">Flutter 跨平台应用开发</h4>
+          <p class="text-gray-600 mb-4 line-clamp-2">
+            全面讲解 Flutter 框架，从基础 UI 组件到复杂应用开发，快速掌握跨平台开发技能。
+          </p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <img src="https://ai-public.mastergo.com/ai/img_res/f0ec07859f7f3f7345c1b2592cb189c1.jpg" 
+                   class="w-8 h-8 rounded-full" alt="讲师头像">
+              <div>
+                <p class="text-sm font-medium">李俊杰</p>
+                <p class="text-xs text-gray-500">移动开发专家</p>
+              </div>
+            </div>
+            <div class="text-primary font-bold">￥349</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 教程路径 -->
+    <div class="mt-16">
+      <h3 class="text-2xl font-bold mb-8">学习路径</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- 路径 1 -->
+        <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-lg transition-shadow border border-gray-100">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <i class="fas fa-code text-primary text-xl"></i>
+          </div>
+          <h4 class="text-lg font-bold mb-2">前端工程师</h4>
+          <p class="text-gray-600 text-sm mb-4">完整的前端开发技能体系，从入门到进阶</p>
+          <div class="flex items-center text-sm text-gray-500 mb-4">
+            <span class="mr-4"><i class="far fa-clock mr-1"></i>6 个月</span>
+            <span><i class="far fa-user mr-1"></i>2,567 人在学</span>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center">
+              <div class="w-1 h-1 bg-blue-500 rounded-full mr-2"></div>
+              <span class="text-sm">HTML5/CSS3 基础</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-1 h-1 bg-blue-500 rounded-full mr-2"></div>
+              <span class="text-sm">JavaScript 核心</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-1 h-1 bg-blue-500 rounded-full mr-2"></div>
+              <span class="text-sm">Vue.js 框架开发</span>
+            </div>
+          </div>
+        </div>
+        <!-- 路径 2 -->
+        <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-lg transition-shadow border border-gray-100">
+          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+            <i class="fas fa-server text-green-600 text-xl"></i>
+          </div>
+          <h4 class="text-lg font-bold mb-2">Java 工程师</h4>
+          <p class="text-gray-600 text-sm mb-4">系统化的 Java 开发学习路线，打造企业级应用</p>
+          <div class="flex items-center text-sm text-gray-500 mb-4">
+            <span class="mr-4"><i class="far fa-clock mr-1"></i>8 个月</span>
+            <span><i class="far fa-user mr-1"></i>3,241 人在学</span>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center">
+              <div class="w-1 h-1 bg-green-500 rounded-full mr-2"></div>
+              <span class="text-sm">Java 核心技术</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-1 h-1 bg-green-500 rounded-full mr-2"></div>
+              <span class="text-sm">Spring 全家桶</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-1 h-1 bg-green-500 rounded-full mr-2"></div>
+              <span class="text-sm">分布式架构设计</span>
+            </div>
+          </div>
+        </div>
+        <!-- 路径 3 -->
+        <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-lg transition-shadow border border-gray-100">
+          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+            <i class="fas fa-mobile-alt text-purple-600 text-xl"></i>
+          </div>
+          <h4 class="text-lg font-bold mb-2">移动开发工程师</h4>
+          <p class="text-gray-600 text-sm mb-4">零基础入门移动端开发，掌握主流技术栈</p>
+          <div class="flex items-center text-sm text-gray-500 mb-4">
+            <span class="mr-4"><i class="far fa-clock mr-1"></i>7 个月</span>
+            <span><i class="far fa-user mr-1"></i>1,892 人在学</span>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center">
+              <div class="w-1 h-1 bg-purple-500 rounded-full mr-2"></div>
+              <span class="text-sm">Android 基础开发</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-1 h-1 bg-purple-500 rounded-full mr-2"></div>
+              <span class="text-sm">Flutter 跨平台开发</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-1 h-1 bg-purple-500 rounded-full mr-2"></div>
+              <span class="text-sm">移动性能优化</span>
+            </div>
+          </div>
+        </div>
+        <!-- 路径 4 -->
+        <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-lg transition-shadow border border-gray-100">
+          <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+            <i class="fas fa-cloud text-red-600 text-xl"></i>
+          </div>
+          <h4 class="text-lg font-bold mb-2">云原生工程师</h4>
+          <p class="text-gray-600 text-sm mb-4">掌握云原生技术栈，成为架构专家</p>
+          <div class="flex items-center text-sm text-gray-500 mb-4">
+            <span class="mr-4"><i class="far fa-clock mr-1"></i>9 个月</span>
+            <span><i class="far fa-user mr-1"></i>1,456 人在学</span>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center">
+              <div class="w-1 h-1 bg-red-500 rounded-full mr-2"></div>
+              <span class="text-sm">Docker 容器化</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-1 h-1 bg-red-500 rounded-full mr-2"></div>
+              <span class="text-sm">Kubernetes 编排</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-1 h-1 bg-red-500 rounded-full mr-2"></div>
+              <span class="text-sm">微服务架构</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 讲师团队 -->
+    <div class="mt-16">
+      <h3 class="text-2xl font-bold mb-8">专业讲师团队</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+          <img src="https://ai-public.mastergo.com/ai/img_res/513c4ce91ae7fbfebcf5bee3e2b306a3.jpg" 
+               class="w-24 h-24 rounded-full mx-auto mb-4" alt="讲师头像">
+          <h4 class="font-bold mb-1">陈志远</h4>
+          <p class="text-gray-500 text-sm mb-3">前端技术专家</p>
+          <p class="text-sm text-gray-600 mb-4">前 BAT 高级工程师，8 年开发经验，精通前端工程化</p>
+          <button class="px-4 py-2 border border-primary text-primary rounded-button hover:bg-primary hover:text-white whitespace-nowrap">查看主页</button>
+        </div>
+        <div class="bg-white rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+          <img src="https://ai-public.mastergo.com/ai/img_res/9be8cc2c3df0935846bddd09d36c4695.jpg" 
+               class="w-24 h-24 rounded-full mx-auto mb-4" alt="讲师头像">
+          <h4 class="font-bold mb-1">张雪琪</h4>
+          <p class="text-gray-500 text-sm mb-3">架构师</p>
+          <p class="text-sm text-gray-600 mb-4">十年互联网经验，专注于分布式系统架构设计</p>
+          <button class="px-4 py-2 border border-primary text-primary rounded-button hover:bg-primary hover:text-white whitespace-nowrap">查看主页</button>
+        </div>
+        <div class="bg-white rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+          <img src="https://ai-public.mastergo.com/ai/img_res/fba6a1cbf50e556d1dbcafb61bd1f802.jpg" 
+               class="w-24 h-24 rounded-full mx-auto mb-4" alt="讲师头像">
+          <h4 class="font-bold mb-1">李俊杰</h4>
+          <p class="text-gray-500 text-sm mb-3">移动开发专家</p>
+          <p class="text-sm text-gray-600 mb-4">资深移动端开发者，Flutter GDE，著有多部技术书籍</p>
+          <button class="px-4 py-2 border border-primary text-primary rounded-button hover:bg-primary hover:text-white whitespace-nowrap">查看主页</button>
+        </div>
+        <div class="bg-white rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+          <img src="https://ai-public.mastergo.com/ai/img_res/ed86aa12b8fac4310d3836f4ee032f95.jpg" 
+               class="w-24 h-24 rounded-full mx-auto mb-4" alt="讲师头像">
+          <h4 class="font-bold mb-1">王浩然</h4>
+          <p class="text-gray-500 text-sm mb-3">云原生专家</p>
+          <p class="text-sm text-gray-600 mb-4">CNCF Ambassador，深耕云原生领域，培养千名工程师</p>
+          <button class="px-4 py-2 border border-primary text-primary rounded-button hover:bg-primary hover:text-white whitespace-nowrap">查看主页</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+<footer class="fixed bottom-0 w-full bg-transparent text-gray-600 py-4">
+<div class="container mx-auto px-6 text-center text-sm">
+<p>&copy; 2024 TechShare. All rights reserved.</p>
+</div>
+</footer>
+<div class="container mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+<div>
+<h1 class="text-3xl font-['Pacifico'] mb-6 logo-text">TechShare</h1>
+<p class="mb-4">分享技术，连接未来。在这里，与千万开发者一起成长。</p>
+<div class="flex space-x-4">
+<a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-github text-xl"></i></a>
+<a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+<a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-xl"></i></a>
+</div>
+</div>
+<div>
+<h4 class="text-white text-lg font-bold mb-6">快速链接</h4>
+<ul class="space-y-3">
+<li><a href="#" class="hover:text-white">首页</a></li>
+<li><a href="#" class="hover:text-white">文章</a></li>
+<li><a href="#" class="hover:text-white">教程</a></li>
+<li><a href="#" class="hover:text-white">接单专区</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white text-lg font-bold mb-6">帮助支持</h4>
+<ul class="space-y-3">
+<li><a href="#" class="hover:text-white">帮助中心</a></li>
+<li><a href="#" class="hover:text-white">联系我们</a></li>
+<li><a href="#" class="hover:text-white">用户协议</a></li>
+<li><a href="#" class="hover:text-white">隐私政策</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white text-lg font-bold mb-6">联系我们</h4>
+<ul class="space-y-3">
+<li><i class="far fa-envelope mr-2"></i>contact@example.com</li>
+<li><i class="far fa-phone mr-2"></i>400-123-4567</li>
+<li><i class="far fa-map-marker-alt mr-2"></i>北京市朝阳区科技园区</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-12 pt-8 text-center">
+<p>&copy; 2024 博客平台. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body>
+</html>
