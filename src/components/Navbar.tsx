@@ -1,14 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/contexts/AuthContext'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 
 export default function Navbar() {
-  const { isAuthenticated, getUser, logout } = useAuth()
-  const user = getUser()
+  const { isAuthenticated, user, showLoginModal, logout } = useAuth()
   const pathname = usePathname()
 
   const navLinks = [
@@ -56,43 +54,46 @@ export default function Navbar() {
               />
               <i className="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
             </div>
-            {isAuthenticated() ? (
-              <div className="flex items-center space-x-4">
-                <Link
-                  href="/profile"
-                  className="flex items-center space-x-2 hover:text-primary transition-colors"
-                >
-                  <Image
-                    src={user?.avatar || 'https://ui-avatars.com/api/?name=User&background=random'}
+            {isAuthenticated ? (
+              <div className="relative group">
+                <button className="flex items-center space-x-1">
+                  <img
+                    src={user?.avatar || '/default-avatar.png'}
                     alt="用户头像"
-                    width={32}
-                    height={32}
-                    className="rounded-full"
+                    className="h-8 w-8 rounded-full"
                   />
                   <span className="text-gray-700">{user?.name}</span>
-                </Link>
-                <button
-                  onClick={logout}
-                  className="px-6 py-2 border border-primary text-primary rounded-button hover:bg-blue-50 transition-colors whitespace-nowrap"
-                >
-                  退出
                 </button>
+                <div className="absolute right-0 top-full mt-1 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <div className="py-1">
+                    <Link
+                      href="/profile"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      个人中心
+                    </Link>
+                    <Link
+                      href="/admin"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      后台管理
+                    </Link>
+                    <button
+                      onClick={logout}
+                      className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      退出登录
+                    </button>
+                  </div>
+                </div>
               </div>
             ) : (
-              <>
-                <Link
-                  href="/auth/login"
-                  className="px-6 py-2 bg-primary text-white rounded-button hover:bg-blue-600 transition-colors whitespace-nowrap"
-                >
-                  登录
-                </Link>
-                <Link
-                  href="/auth/register"
-                  className="px-6 py-2 border border-primary text-primary rounded-button hover:bg-blue-50 transition-colors whitespace-nowrap"
-                >
-                  注册
-                </Link>
-              </>
+              <button
+                onClick={showLoginModal}
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              >
+                登录
+              </button>
             )}
           </div>
         </div>

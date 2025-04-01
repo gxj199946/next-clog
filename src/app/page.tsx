@@ -81,7 +81,7 @@ export default function HomePage() {
                 />
                 <div className="p-6">
                   <div className="flex items-center mb-4">
-                    <Image
+        <Image
                       src="https://ai-public.mastergo.com/ai/img_res/1ccd3a0475619eb4d46ef09ed708d375.jpg"
                       alt="作者头像"
                       width={40}
@@ -120,7 +120,7 @@ export default function HomePage() {
                 />
                 <div className="p-6">
                   <div className="flex items-center mb-4">
-                    <Image
+            <Image
                       src="https://ai-public.mastergo.com/ai/img_res/7ea8ffc1fb07e740f7e5469936fa41a9.jpg"
                       alt="作者头像"
                       width={40}
@@ -209,7 +209,7 @@ export default function HomePage() {
                 <p className="text-gray-600">接单项目</p>
               </div>
             </div>
-          </div>
+        </div>
         </section>
 
         <section className="py-20 bg-gray-50">
@@ -217,7 +217,7 @@ export default function HomePage() {
             <h3 className="text-3xl font-bold mb-12 text-center">最新教程</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all duration-300">
-                <Image
+          <Image
                   src="https://ai-public.mastergo.com/ai/img_res/58884b07717100abf6dc5acd5d8fb09a.jpg"
                   alt="教程封面"
                   width={400}
@@ -242,7 +242,7 @@ export default function HomePage() {
               </div>
 
               <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all duration-300">
-                <Image
+          <Image
                   src="https://ai-public.mastergo.com/ai/img_res/5def41ab458477ff5eaa3daab5b20d4c.jpg"
                   alt="教程封面"
                   width={400}
@@ -267,7 +267,7 @@ export default function HomePage() {
               </div>
 
               <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all duration-300">
-                <Image
+          <Image
                   src="https://ai-public.mastergo.com/ai/img_res/7ea8ffc1fb07e740f7e5469936fa41a9.jpg"
                   alt="教程封面"
                   width={400}

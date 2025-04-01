@@ -2,12 +2,13 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from '@/components/Navbar'
+import { AuthProvider } from '@/contexts/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: '博客系统',
-  description: '一个现代化的博客系统',
+  title: '技术派 - 技术分享社区',
+  description: '专注于技术分享和学习的社区平台',
 }
 
 export default function RootLayout({
@@ -18,10 +19,12 @@ export default function RootLayout({
   return (
     <html lang="zh">
       <body className={inter.className}>
-        <Navbar />
-        <main className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-600">
-          {children}
-        </main>
+        <AuthProvider>
+          <Navbar />
+          <main className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-600">
+            {children}
+          </main>
+        </AuthProvider>
       </body>
     </html>
   )
